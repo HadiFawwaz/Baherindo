@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\MotorBaherIndo;
 use Illuminate\Http\Request;
 
-class clove extends Controller
+class MotorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $motor = MotorBaherIndo::all();
-        return view('home', compact('motor'));
+        return view ('motor.create');
     }
 
     /**
@@ -29,7 +28,23 @@ class clove extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $validateData = $request->validate([
+            'nama_motor' => 'required|string',
+            'harga_motor' => 'required|numeric',
+            'km_motor' => 'required|integer',
+            'tahun_motor' => 'required|integer',
+            'gambar_motor' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('gambar_motor')) {
+            $path = $request->file('gambar_motor')->store('motor_images', 'public');
+            $validateData['gambar_motor'] = $path;
+            }
+
+        // Logic to store the motor data
+        MotorBaherIndo::create($validateData);
+
+        return redirect('home');
     }
 
     /**
