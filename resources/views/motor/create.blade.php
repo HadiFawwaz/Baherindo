@@ -1,39 +1,57 @@
 @extends('layouts.main')
 
-@section('title', 'Welcome To Baharindo Motor')
+@section('title', 'Tambah motor - Baharindo')
 
 @section('content')
-<main class="pt-16">
-  <div class="ml-4 mr-4">
-    <form action="{{ route('motor.store') }}" method="POST" enctype="multipart/form-data">
+<main class="pt-20">
+  <div class="mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-8 text-gray-900 dark:black">Tambah motor Baru</h1>
+
+    <form action="{{ route('motor.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow-md space-y-6">
       @csrf
 
-      <div class="mb-5">
-        <label for="nama_motor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nama Motor</label>
-        <input type="text" name="nama_motor" id="nama_motor" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Masukan Nama Motor" />
+      <div>
+        <label for="nama_motor" class="block mb-2 text-sm font-medium  text-black before:content-['•'] before:text-blue-500 before:mr-2">
+          Nama motor
+        </label>
+        <input type="text" name="nama_motor" id="nama_motor" placeholder="Masukkan Nama motor"
+          class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
       </div>
 
-      <div class="mb-5">
-        <label for="harga_motor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Harga Motor</label>
-        <input type="number" name="harga_motor" id="harga_motor" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Masukan Harga Motor" />
+      <div>
+        <label for="harga_motor" class="block mb-2 text-sm font-medium  text-black before:content-['•'] before:text-blue-500 before:mr-2">
+          Harga motor
+        </label>
+        <input type="number" name="harga_motor" id="harga_motor" placeholder="Masukkan Harga motor"
+          class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
       </div>
 
-      <div class="mb-5">
-        <label for="tahun_motor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Tahun Motor</label>
-        <input type="number" name="tahun_motor" id="tahun_motor" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Masukan Tahun Motor" />
+      <div>
+        <label for="tahun_motor" class="block mb-2 text-sm font-medium  text-black before:content-['•'] before:text-blue-500 before:mr-2">
+          Tahun motor
+        </label>
+        <input type="number" name="tahun_motor" id="tahun_motor" placeholder="Masukkan Tahun motor"
+          class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
       </div>
 
-      <div class="mb-5">
-        <label for="km_motor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Kilometer Ditempuh</label>
-        <input type="number" name="km_motor" id="km_motor" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Masukan Kilometer Ditempuh" />
+      <div>
+        <label for="km_motor" class="block mb-2 text-sm font-medium  text-black before:content-['•'] before:text-blue-500 before:mr-2">
+          Kilometer Ditempuh
+        </label>
+        <input type="number" name="km_motor" id="km_motor" placeholder="Masukkan Kilometer Ditempuh"
+          class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
       </div>
 
-      <div class="mb-5">
-        <label for="gambar_motor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Foto Motor</label>
-        <input type="file" name="gambar_motor" id="gambar_motor" accept="image/*" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+      <div>
+        <label for="gambar_motor" class="block mb-2 text-sm font-medium  text-black before:content-['•'] before:text-blue-500 before:mr-2">
+          Foto motor
+        </label>
+        <input type="file" name="gambar_motor" id="gambar_motor" accept="image/*"
+          class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
-      <button type="submit" class="px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm">
+      <button type="submit"
+        class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-4 focus:ring-blue-300">
         Submit
       </button>
     </form>

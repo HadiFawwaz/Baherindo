@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\mobil;
-use App\Models\mobilbaherindo;
+use App\Models\mobilBaherIndo;
 use Illuminate\Http\Request;
 
 class MobilController extends Controller
@@ -13,8 +12,7 @@ class MobilController extends Controller
      */
     public function index()
     {
-        $mobil = mobilbaherindo::all();
-        return view('mobil/create', compact('mobil'));
+        return view('mobil.create');
     }
 
     /**
@@ -22,9 +20,8 @@ class MobilController extends Controller
      */
     public function create()
     {
-        return view('mobil.create');
+        //
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +42,7 @@ class MobilController extends Controller
         }
 
         // Logic to store the mobil data
-        mobilbaherindo::create($validateData);
+        mobilBaherIndo::create($validateData);
 
         return redirect('mobilhome');
     }
@@ -55,7 +52,8 @@ class MobilController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mobil = mobilBaherindo::findOrFail($id);
+        return view('mobil.show', compact('mobil'));
     }
 
     /**
@@ -63,7 +61,8 @@ class MobilController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mobil = mobilBaherIndo::findOrFail($id);
+        return view('mobil.edit', compact('mobil'));
     }
 
     /**
@@ -71,14 +70,43 @@ class MobilController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $mobil = mobilBaherIndo::findOrFail($id);
+
+        $validateData = $request->validate([
+            'nama_mobil' => 'required|string',
+            'harga_mobil' => 'required|numeric',
+            'km_mobil' => 'required|integer',
+            'tahun_mobil' => 'required|integer',
+            'gambar_mobil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('gambar_mobil')) {
+            if ($mobil->gambar_mobil && \Storage::exists('public/' . $mobil->gambar_mobil)) {
+                \Storage::delete('public/' . $mobil->gambar_mobil);
+            }
+            $path = $request->file('gambar_mobil')->store('mobil_images', 'public');
+            $validateData['gambar_mobil'] = $path;
+        }
+
+        $mobil->update($validateData);
+
+        return redirect()->route('mobilhome.index')->with('success', 'mobil berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $mobil = mobilBaherIndo::findOrFail($id);
+
+        $mobil->delete();
+
+        return redirect()->route('mobilhome.index')->with('success', 'mobil berhasil dihapus');
+
+
+        if ($mobil->gambar_mobil && file_exists(public_path('storage/mobil_images/' . $mobil->gambar_mobil))) {
+            unlink(public_path('storage/mobil_images/' . $mobil->gambar_mobil));
+        }
     }
 }

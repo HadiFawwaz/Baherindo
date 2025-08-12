@@ -25,12 +25,16 @@
 </div>
 
 
+
         @php $current = Request::path(); @endphp
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a href="home" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Beli Motor</a>
-            <a href="contact" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'contact' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Contact</a>
-            <a href="about" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'about' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">About</a>
+            <a href="/home" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Beli Motor</a>
+            <a href="/mobilhome" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'mobilhome' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Beli Mobil</a>
+            <a href="/contact" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'contact' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Contact</a>
+            <a href="/about" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'about' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">About</a>
+            <a href="/motor" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'about' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Tambah Motor</a>
+            <a href="/mobil" class="rounded-md px-3 py-2 text-sm font-medium {{ $current == 'about' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">Tambah Mobil</a>
           </div>
         </div>
       </div>

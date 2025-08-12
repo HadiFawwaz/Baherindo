@@ -12,7 +12,7 @@ class MotorController extends Controller
      */
     public function index()
     {
-        return view ('motor.create');
+        return view('motor.create');
     }
 
     /**
@@ -28,7 +28,7 @@ class MotorController extends Controller
      */
     public function store(Request $request)
     {
-       $validateData = $request->validate([
+        $validateData = $request->validate([
             'nama_motor' => 'required|string',
             'harga_motor' => 'required|numeric',
             'km_motor' => 'required|integer',
@@ -39,7 +39,7 @@ class MotorController extends Controller
         if ($request->hasFile('gambar_motor')) {
             $path = $request->file('gambar_motor')->store('motor_images', 'public');
             $validateData['gambar_motor'] = $path;
-            }
+        }
 
         // Logic to store the motor data
         MotorBaherIndo::create($validateData);
@@ -52,7 +52,8 @@ class MotorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $motor = MotorBaherindo::findOrFail($id);
+        return view('motor.show', compact('motor'));
     }
 
     /**
@@ -60,7 +61,8 @@ class MotorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $motor = MotorBaherIndo::findOrFail($id);
+        return view('motor.edit', compact('motor'));
     }
 
     /**
@@ -68,14 +70,43 @@ class MotorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $motor = MotorBaherIndo::findOrFail($id);
+
+        $validateData = $request->validate([
+            'nama_motor' => 'required|string',
+            'harga_motor' => 'required|numeric',
+            'km_motor' => 'required|integer',
+            'tahun_motor' => 'required|integer',
+            'gambar_motor' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('gambar_motor')) {
+            if ($motor->gambar_motor && \Storage::exists('public/' . $motor->gambar_motor)) {
+                \Storage::delete('public/' . $motor->gambar_motor);
+            }
+            $path = $request->file('gambar_motor')->store('motor_images', 'public');
+            $validateData['gambar_motor'] = $path;
+        }
+
+        $motor->update($validateData);
+
+        return redirect()->route('home.index')->with('success', 'Motor berhasil diperbarui');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $motor = MotorBaherIndo::findOrFail($id);
+
+        $motor->delete();
+
+        return redirect()->route('home.index')->with('success', 'Motor berhasil dihapus');
+
+        
+    if ($motor->gambar_motor && file_exists(public_path('storage/motor_images/' . $motor->gambar_motor))) {
+        unlink(public_path('storage/motor_images/' . $motor->gambar_motor));
+    }
     }
 }
