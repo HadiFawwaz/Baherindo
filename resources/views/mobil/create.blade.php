@@ -48,7 +48,7 @@
         </label>
         <input type="file" name="gambar_mobil" id="gambar_mobil" accept="image/*"
           class="w-full border border-gray-300 rounded-lg p-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
+      </div>  
 
       <button type="submit"
         class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-4 focus:ring-blue-300">
